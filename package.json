@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@elastic/elasticsearch": "^7.17.0",
+    "@elastic/elasticsearch": "7.10",
     "@eosrio/node-abieos": "3.3.2",
     "@fastify/autoload": "4.0.1",
     "@fastify/cors": "7.0.0",

@@ -4,7 +4,7 @@ exports.getBlocks = exports.getLastIndexedBlock = exports.getFirstIndexedBlock =
 const node_fs_1 = require("node:fs");
 const elasticsearch_1 = require("@elastic/elasticsearch");
 function readConnectionConfig() {
-    const file = (0, node_fs_1.readFileSync)('connections.json', 'utf8');
+    const file = (0, node_fs_1.readFileSync)("connections.json", "utf8");
     return JSON.parse(file);
 }
 exports.readConnectionConfig = readConnectionConfig;
@@ -14,16 +14,16 @@ function initESClient(config) {
         nodes: [node],
         auth: {
             username: config.elasticsearch.user,
-            password: config.elasticsearch.pass
+            password: config.elasticsearch.pass,
         },
         ssl: {
-            rejectUnauthorized: false
-        }
+            rejectUnauthorized: false,
+        },
     });
 }
 exports.initESClient = initESClient;
 function readChainConfig(chain) {
-    const file = (0, node_fs_1.readFileSync)(`chains/${chain}.config.json`, 'utf8');
+    const file = (0, node_fs_1.readFileSync)(`chains/${chain}.config.json`, "utf8");
     return JSON.parse(file);
 }
 exports.readChainConfig = readChainConfig;
@@ -32,14 +32,14 @@ async function getFirstIndexedBlock(client, blockIndex) {
         index: blockIndex,
         size: 1,
         body: {
-            sort: [{ block_num: { order: 'asc' } }]
-        }
+            sort: [{ block_num: { order: "asc" } }],
+        },
     });
     if (body.hits.hits[0]._source) {
         return body.hits.hits[0]._source.block_num;
     }
     else {
-        console.log('No blocks indexed yet');
+        console.log("No blocks indexed yet");
         process.exit();
     }
 }
@@ -49,14 +49,14 @@ async function getLastIndexedBlock(client, blockIndex) {
         index: blockIndex,
         size: 1,
         body: {
-            sort: [{ block_num: { order: 'desc' } }]
-        }
+            sort: [{ block_num: { order: "desc" } }],
+        },
     });
     if (body.hits.hits[0]._source) {
         return body.hits.hits[0]._source.block_num;
     }
     else {
-        console.log('No blocks indexed yet');
+        console.log("No blocks indexed yet");
         process.exit();
     }
 }
@@ -75,7 +75,7 @@ async function getBlocks(client, indexName, blocoInicial, blocoFinal, size) {
                     },
                 },
             },
-        }
+        },
     });
 }
 exports.getBlocks = getBlocks;

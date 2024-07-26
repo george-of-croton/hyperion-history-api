@@ -1677,6 +1677,9 @@ export class HyperionMaster {
 
     async runMaster() {
 
+        hLog("RUN MASTER")
+
+
         // config checks
         if (!this.conf.scaling.max_queue_limit) {
             hLog(`scaling.max_queue_limit is not defined!`);
@@ -1697,6 +1700,8 @@ export class HyperionMaster {
             hLog(`[FATAL ERROR] settings.index_partition_size is not defined!`);
             process.exit(1);
         }
+
+        hLog("ABOUT TO RUN PRINT MODE")
 
         this.printMode();
         let controlPort = this.manager.conn.chains[this.conf.settings.chain].control_port;
